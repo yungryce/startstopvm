@@ -45,17 +45,6 @@ def stop_vm():
     except Exception as e:
         logging.error(f'Failed to stop VM {VM_NAME}: {str(e)}')
 
-def ping_storage():
-    try:
-        logging.info("Pinging storage account...")
-        blob_service_client = BlobServiceClient.from_connection_string(STORAGE_CONNECTION_STRING)
-        containers = blob_service_client.list_containers()
-        container_names = [container.name for container in containers]
-        logging.info(f"Storage account is active. Containers: {container_names}")
-    except Exception as e:
-        logging.error(f"Failed to ping storage account: {str(e)}")
-
-
 
 # Define the timer trigger schedule
 @app.timer_trigger(schedule="0 0 6 * * 1-5", arg_name="mytimer", run_on_startup=False)  # 7 AM UTC+1 (6 AM UTC)
@@ -72,10 +61,3 @@ def stopvm(mytimer: func.TimerRequest) -> None:
     logging.info('Current cron schedule: %s', "0 16 * * *")
     stop_vm()
 
-
-# Ping storage every hour
-@app.timer_trigger(schedule="0 0/30 * * * *", arg_name="mytimer", run_on_startup=True)  # Every hour
-def pingstorage(mytimer: func.TimerRequest) -> None:
-    utc_now = datetime.datetime.utcnow()
-    logging.info('Ping Storage function ran at %s', utc_now)
-    ping_storage()
