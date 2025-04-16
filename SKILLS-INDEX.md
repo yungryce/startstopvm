@@ -4,7 +4,6 @@ This document maps specific technical skills to their implementations within thi
 
 ## Serverless Architecture
 - **Timer Trigger Definition**: [function_app.py](./function_app.py#L35-L46)
-- **Azure Functions Setup**: [.vscode/settings.json](./.vscode/settings.json#L1-L7)
 
 ## Cloud Resource Management
 - **VM Start Operation**: [function_app.py](./function_app.py#L17-L23)
