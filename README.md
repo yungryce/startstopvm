@@ -1,63 +1,76 @@
 # Azure Function App: Start and Stop VM
 
-This Azure Function App automates the starting and stopping of a Virtual Machine (VM) in Azure. The VM is configured to start at 7 AM and stop at 5 PM from Monday to Friday.
+An automated cloud solution that manages the lifecycle of Azure Virtual Machines based on a predefined schedule. This serverless application utilizes Azure Functions with timer triggers to start VMs at the beginning of business hours and stop them at the end, optimizing cloud resource costs.
 
-## Features
+## 🎯 Features
 
-- Starts a specified VM in a defined resource group.
-- Stops the same VM at a specified time.
-- Utilizes Azure's managed identity for authentication and authorization.
+- **Scheduled VM Management**: Automatically starts VMs at 7 AM and stops at 5 PM on weekdays
+- **Managed Identity Authentication**: Secure, credential-free authentication to Azure resources
+- **Error Resilience**: Comprehensive error handling and logging for operational visibility
+- **CI/CD Integration**: Automated deployment pipeline via GitHub Actions
+- **Cost Optimization**: Reduces cloud expenses by ensuring VMs run only during business hours
 
-## Prerequisites
+## 🔧 Technologies
 
-- An Azure subscription.
-- Azure SDK for Python.
-- Azure Function App setup.
+- **Runtime**: Python 3.10
+- **Framework**: Azure Functions v4
+- **Authentication**: Azure DefaultAzureCredential
+- **Key Libraries**: azure-functions, azure-mgmt-compute, azure-identity
+- **DevOps**: GitHub Actions, Azure Functions Core Tools
 
-## Configuration
+## 🏗️ Architecture
+
+This project implements a serverless architecture pattern with scheduled triggers. For detailed architecture information, see [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+## ⚙️ Configuration
 
 ### Environment Variables
 
-Make sure to set the following environment variables in your Azure Function App configuration:
+Configure the following variables in your Azure Function App settings:
 
-- **AZURE_SUBSCRIPTION_ID**: Your Azure subscription ID.
-- **RESOURCE_GROUP**: The name of the resource group where your VM resides (e.g., `Lab-Win11`).
-- **VM_NAME**: The name of the VM you want to start and stop (e.g., `win11`).
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `AZURE_SUBSCRIPTION_ID` | Your Azure subscription identifier | `12345678-1234-1234-1234-123456789abc` |
+| `RESOURCE_GROUP` | Resource group containing the VM | `Lab-Win11` |
+| `VM_NAME` | Name of the target virtual machine | `win11` |
 
-### Python Packages
+## 🚀 Deployment
 
-Ensure that the following Python packages are included in your Function App:
+The application is deployed automatically via GitHub Actions when changes are pushed to the master branch.
 
-- `azure-functions`
-- `azure-identity`
-- `azure-mgmt-compute`
+### Manual Deployment
 
-## Functionality
+```bash
+# Install dependencies
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
-### Start VM
+# Login to Azure
+az login
 
-The `start_vm` function initiates the specified VM using the Azure Compute Management client. This function is triggered by a timer to run at 7 AM (UTC+1) from Monday to Friday.
+# Deploy the function
+func azure functionapp publish startstopvmapp --python
+```
 
-### Stop VM
+## 📋 Skills Demonstrated
 
-The `stop_vm` function stops the specified VM using the Azure Compute Management client. This function is triggered by a timer to run at 5 PM (UTC+1) from Monday to Friday.
+This project showcases several technical competencies. For a detailed mapping of skills to implementations, see [SKILLS-INDEX.md](./SKILLS-INDEX.md).
 
-## Usage
+## 🔍 Monitoring
 
-1. Deploy the Azure Function App to your Azure account.
-2. Set the required environment variables.
-3. Monitor the logs to ensure the VM starts and stops as scheduled.
+Monitor function execution through:
 
-## Logging
+- Azure Portal > Function App > Monitor
+- Application Insights for detailed telemetry
+- Function App logs via: `az functionapp logs tail --name startstopvmapp --resource-group YOUR_RESOURCE_GROUP`
 
-Logging is set up to provide feedback on the operations of starting and stopping the VM. You can view logs in the Azure portal under the Function App's "Log stream".
+## 🔒 Security Considerations
 
-## Troubleshooting
+- Uses managed identities instead of service principals
+- No credentials stored in code or configuration
+- Minimal permission model with RBAC assignments
 
-- Ensure that the environment variables are correctly set.
-- Verify that the VM and resource group names are correct.
-- Check Azure logs for detailed error messages if the VM fails to start or stop.
-
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
