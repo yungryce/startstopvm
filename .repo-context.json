@@ -1,16 +1,196 @@
 {
   "project_identity": {
-    "type": "serverless",
-    "scope": "azure_function",
-    "is_independent": true
+    "name": "Start/Stop VM Azure Function App",
+    "type": "project",
+    "scope": "cloud-automation",
+    "description": "Automated serverless solution for managing Azure Virtual Machine lifecycles with timer-triggered start/stop operations. Demonstrates cloud cost optimization, infrastructure automation, and serverless architecture patterns using Azure Functions and Compute Management APIs.",
+    "is_independent": true,
+    "version": "1.0.0",
+    "curriculum_stage": "advanced"
   },
   "tech_stack": {
-    "primary": ["Python 3.10+", "Azure Functions", "GitHub Actions"],
-    "secondary": ["Azure Compute Management", "Timer Triggers", "Azure Identity"],
-    "key_libraries": ["azure-functions", "azure-mgmt-compute", "azure-identity", "azure-storage-blob"]
+    "primary": ["Python 3.10+", "Azure Functions", "Azure Compute Management"],
+    "secondary": ["Azure Identity", "Timer Triggers", "Managed Identity", "GitHub Actions"],
+    "key_libraries": ["azure-functions", "azure-mgmt-compute", "azure-identity", "azure-storage-blob"],
+    "development_tools": ["Azure Functions Core Tools", "Visual Studio Code", "Git", "Azure CLI"],
+    "testing_frameworks": ["pytest", "Azure Function testing tools"]
   },
   "skill_manifest": {
-    "technical": ["Serverless Computing", "Cloud Automation", "CI/CD", "Python Development"],
-    "domain": ["Cloud Resource Management", "Cost Optimization", "DevOps", "Azure Administration"]
+    "technical": [
+      "Serverless Architecture",
+      "Cloud Automation",
+      "Azure Functions Development", 
+      "Timer-Triggered Functions",
+      "Azure Compute Management",
+      "Managed Identity Authentication",
+      "Infrastructure as Code",
+      "Cost Optimization",
+      "Error Handling & Logging",
+      "CI/CD with GitHub Actions"
+    ],
+    "domain": [
+      "Cloud Resource Management",
+      "DevOps Automation",
+      "Azure Administration",
+      "Infrastructure Optimization",
+      "Serverless Computing",
+      "Cloud Security",
+      "Business Process Automation"
+    ],
+    "competency_level": "intermediate-to-advanced",
+    "prerequisites": [
+      "Basic Python programming",
+      "Azure fundamentals",
+      "Cloud computing concepts",
+      "Understanding of virtual machines"
+    ]
+  },
+  "components": {
+    "main_files": [
+      {
+        "path": "function_app.py",
+        "purpose": "Main Azure Function application with timer triggers for VM start/stop operations",
+        "complexity": "intermediate",
+        "key_functions": ["start_vm", "stop_vm", "startvm", "stopvm"]
+      },
+      {
+        "path": "requirements.txt", 
+        "purpose": "Python dependencies for Azure Functions and Compute Management",
+        "complexity": "basic"
+      },
+      {
+        "path": "host.json",
+        "purpose": "Azure Functions runtime configuration",
+        "complexity": "basic"
+      }
+    ],
+    "configuration": [
+      {
+        "type": "environment_variables",
+        "items": ["AZURE_SUBSCRIPTION_ID", "AzureWebJobsStorage"],
+        "purpose": "Azure resource authentication and configuration"
+      },
+      {
+        "type": "timer_schedules",
+        "items": ["0 0 6 * * 1-5", "0 0 16 * * 1-5"],
+        "purpose": "Weekday business hours VM lifecycle management"
+      }
+    ]
+  },
+  "topics": [
+    "Azure Functions",
+    "Serverless Computing",
+    "Cloud Automation",
+    "Virtual Machine Management",
+    "Cost Optimization",
+    "Timer Triggers",
+    "Managed Identity",
+    "Infrastructure Automation",
+    "DevOps",
+    "Azure Compute",
+    "Resource Management",
+    "Business Hours Automation"
+  ],
+  "projectStructure": {
+    "entryPoint": "function_app.py",
+    "configFiles": ["host.json", "requirements.txt"],
+    "documentationFiles": ["README.md", "ARCHITECTURE.md", "SKILLS-INDEX.md"],
+    "deploymentFiles": [".github/workflows/*.yml"]
+  },
+  "outcomes": {
+    "primary": [
+      "Implement automated VM lifecycle management using Azure Functions",
+      "Design cost-effective cloud resource scheduling solutions",
+      "Apply serverless architecture patterns for infrastructure automation",
+      "Integrate Azure Compute Management APIs with Function Apps"
+    ],
+    "skills_acquired": [
+      "Timer-triggered function development",
+      "Azure resource management through code",
+      "Managed identity authentication implementation",
+      "Cloud cost optimization strategies",
+      "Error handling in serverless environments"
+    ],
+    "deliverables": [
+      "Production-ready VM automation function",
+      "Comprehensive error handling and logging",
+      "CI/CD pipeline for automated deployment",
+      "Documentation and architecture guides"
+    ]
+  },
+  "prerequisites": {
+    "knowledge": [
+      "Python programming fundamentals",
+      "Azure cloud platform basics",
+      "Virtual machine concepts",
+      "Basic understanding of serverless computing"
+    ],
+    "technical": [
+      "Azure subscription access",
+      "Azure CLI installed",
+      "Python 3.10+ development environment",
+      "Git version control"
+    ]
+  },
+  "associatedProjects": [
+    {
+      "name": "authentication-FA",
+      "relationship": "Related serverless function in same portfolio",
+      "shared_concepts": ["Azure Functions", "Serverless Architecture", "Authentication"]
+    },
+    {
+      "name": "Email_FA", 
+      "relationship": "Related Azure Function project",
+      "shared_concepts": ["Timer Triggers", "Azure Functions", "Cloud Automation"]
+    }
+  ],
+  "files": {
+    "total_count": 8,
+    "by_type": {
+      "source_code": 1,
+      "configuration": 2,
+      "documentation": 3,
+      "deployment": 1,
+      "metadata": 1
+    },
+    "key_files": [
+      "function_app.py",
+      "requirements.txt", 
+      "host.json",
+      "README.md",
+      "ARCHITECTURE.md"
+    ]
+  },
+  "assessment": {
+    "difficulty": "intermediate",
+    "estimated_hours": 8,
+    "complexity_factors": [
+      "Azure Functions timer triggers",
+      "Compute Management API integration", 
+      "Managed identity configuration",
+      "Error handling and logging",
+      "CI/CD pipeline setup"
+    ],
+    "evaluation_criteria": [
+      "Correct timer trigger implementation",
+      "Successful VM start/stop operations", 
+      "Proper error handling and logging",
+      "Security best practices (managed identity)",
+      "Cost optimization effectiveness"
+    ]
+  },
+  "metadata": {
+    "created_date": "2024",
+    "last_updated": "2025-06-24",
+    "maintainer": "Chigbu Joshua",
+    "license": "MIT",
+    "repository_type": "educational-project",
+    "tags": ["azure-functions", "vm-automation", "cost-optimization", "serverless", "timer-triggers", "cloud-automation"],
+    "quality_indicators": {
+      "code_coverage": "moderate",
+      "documentation_quality": "comprehensive", 
+      "test_coverage": "basic",
+      "production_readiness": "high"
+    }
   }
 }
